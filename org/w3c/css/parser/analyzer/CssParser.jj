@@ -529,6 +529,7 @@ TOKEN :
   | <IDENT     : <_IDENT> >
   | <HASHIDENT : "#" <_IDENT> >
   | <HASH      : "#" <NAME> >
+  | <VARNAME   : "--" <NAME> >
 }
 
 <DEFAULT>
