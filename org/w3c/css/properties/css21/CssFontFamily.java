@@ -116,6 +116,7 @@ public class CssFontFamily extends org.w3c.css.properties.css.CssFontFamily {
 			throws InvalidParamException {
 
 		ArrayList<CssValue> values = new ArrayList<CssValue>();
+		Set<String> distinctFontFamilyNames = new HashSet<String>();
 
 		while (!expression.end()) {
 			char op = expression.getOperator();
@@ -124,7 +125,6 @@ public class CssFontFamily extends org.w3c.css.properties.css.CssFontFamily {
 				case CssTypes.CSS_STRING:
 					String s = val.toString();
 					// check duplicate font family names
-					Set<String> distinctFontFamilyNames = new HashSet<String>();
 					if (distinctFontFamilyNames.contains(s)) {
 						ac.getFrame().addWarning("no-duplicate-fonts", 2);
 					} else {
