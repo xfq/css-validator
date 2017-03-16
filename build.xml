@@ -6,7 +6,7 @@
   <!-- User-overrideable properties                                      -->
   <!-- =================================================================== -->
 
-  <property name="servlet.lib" value="/usr/local/Cellar/tomcat/8.5.11/libexec/lib/servlet-api.jar"/>
+  <property name="servlet.lib" value="/opt/tomcat/lib/servlet-api.jar"/>
 
   <!-- =================================================================== -->
   <!-- Project-wide properties                                           -->
