@@ -14,6 +14,8 @@ import org.w3c.css.values.CssTypes;
 import org.w3c.css.values.CssValue;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.w3c.css.values.CssOperator.COMMA;
 import static org.w3c.css.values.CssOperator.SPACE;
@@ -120,8 +122,16 @@ public class CssFontFamily extends org.w3c.css.properties.css.CssFontFamily {
 			CssValue val = expression.getValue();
 			switch (val.getType()) {
 				case CssTypes.CSS_STRING:
-					// check it's not a quoted reserved keyword
 					String s = val.toString();
+					// check duplicate font family names
+					Set<String> distinctFontFamilyNames = new HashSet<String>();
+					if (distinctFontFamilyNames.contains(s)) {
+						ac.getFrame().addWarning("no-duplicate-fonts", 2);
+					} else {
+						distinctFontFamilyNames.add(s);
+					}
+
+					// check it's not a quoted reserved keyword
 					if (s.length() > 2) {
 						// we remove quotes and check it's not reserved.
 						CssIdent id = new CssIdent(s.substring(1, s.length() - 1));
