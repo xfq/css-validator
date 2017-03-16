@@ -274,6 +274,7 @@ error.angle: %s is not a valid angle. Value should be between 0 and 360
 # used by org.w3c.css.values.CssNumber
 error.zero: only 0 can be a %s. You must put a unit after your number
 warning.zero:  only 0 can be a %s. You must put a unit after your number
+warning.trailingzeros: trailing zeros found in number
 warning.dynamic: dynamic values cannot be checked as an unitless number. Please qualify it with an unit.
 
 #used by org.w3c.css.properties.CssColumnCount
