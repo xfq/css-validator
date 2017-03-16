@@ -67,7 +67,7 @@ public class CssFontFamily extends org.w3c.css.properties.css.CssFontFamily {
 	}
 
 	private void checkExpression(ApplContext ac, ArrayList<CssValue> curval,
-								 ArrayList<CssIdent> values, boolean check) {
+								 ArrayList<CssIdent> values, boolean check, Set<String> distinct) {
 		CssIdent val;
 		if (values.size() > 1) {
 			// create a value out of that. We could even create
@@ -93,6 +93,12 @@ public class CssFontFamily extends org.w3c.css.properties.css.CssFontFamily {
 			if (inherit.equals(val)) {
 				val = inherit;
 			}
+		}
+		// check duplicate font family names
+		if (distinct.contains(val.toString())) {
+			ac.getFrame().addWarning("no-duplicate-fonts", 2);
+		} else {
+			distinct.add(val.toString());
 		}
 		curval.add(val);
 	}
@@ -162,7 +168,7 @@ public class CssFontFamily extends org.w3c.css.properties.css.CssFontFamily {
 									getPropertyName(), ac);
 						}
 					}
-					checkExpression(ac, values, idval, check);
+					checkExpression(ac, values, idval, check, distinctFontFamilyNames);
 					break;
 				default:
 					throw new InvalidParamException("value", val,
