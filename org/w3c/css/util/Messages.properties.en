@@ -426,3 +426,7 @@ error.incompatibletypes: The types are incompatible
 error.invalidtype: Invalid type: %s
 error.typevaluemismatch: The value %s is incompatible with its type definition <%s>
 
+# shorthand
+
+warning.shorthand-redundant: You have some redundant values in shorthand properties.
+

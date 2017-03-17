@@ -941,7 +941,7 @@ public class Css1Style extends CssStyle {
 					"no-background-color", 2, emptyArray, ac));
 		}
 
-		// now testing for % and length in padding and marging
+		// now testing for % and length in padding and margin
 
 		RelativeAndAbsolute checker = new RelativeAndAbsolute();
 		CssProperty info = null;

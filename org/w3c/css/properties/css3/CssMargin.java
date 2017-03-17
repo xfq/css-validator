@@ -130,18 +130,34 @@ public class CssMargin extends org.w3c.css.properties.css.CssMargin {
 					marginRight.value = v.get(1);
 					marginBottom.value = v.get(0);
 					marginLeft.value = v.get(1);
+					if (v.get(0).equals(v.get(1))) {
+						ac.getFrame().addWarning("shorthand-redundant", 2);
+					}
 					break;
 				case 3:
 					marginTop.value = v.get(0);
 					marginRight.value = v.get(1);
 					marginBottom.value = v.get(2);
 					marginLeft.value = v.get(1);
+					if (v.get(0).equals(v.get(2))) {
+						ac.getFrame().addWarning("shorthand-redundant", 2);
+					}
 					break;
 				case 4:
 					marginTop.value = v.get(0);
 					marginRight.value = v.get(1);
 					marginBottom.value = v.get(2);
 					marginLeft.value = v.get(3);
+					
+					if (v.get(0).equals(v.get(2)) || v.get(1).equals(v.get(3))) {
+						// margin: 1px 1px 1px 1px;
+						// margin: 1px 2px 1px 2px;
+						// margin: 1px 2px 3px 2px;
+						// margin: 1px 2px 1px 3px;
+						// margin: 1px 2px 2px 2px;
+						// margin: 2px 2px 2px 1px;
+						ac.getFrame().addWarning("shorthand-redundant", 2);
+					}
 					break;
 				default:
 					// can't happen unless we are not checking
