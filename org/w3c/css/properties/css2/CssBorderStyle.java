@@ -128,17 +128,38 @@ public class CssBorderStyle extends org.w3c.css.properties.css.CssBorderStyle {
             case 2:
                 top.value = bottom.value = res.get(0);
                 right.value = left.value = res.get(1);
+                if (res.get(0).equals(res.get(1))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             case 3:
                 top.value = res.get(0);
                 right.value = left.value = res.get(1);
                 bottom.value = res.get(2);
+                if (res.get(0).equals(res.get(2))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             case 4:
                 top.value = res.get(0);
                 right.value = res.get(1);
                 bottom.value = res.get(2);
                 left.value = res.get(3);
+                
+                // .no-warning { border-style: dotted dotted dashed dashed; }
+				// .no-warning { border-style: dotted dotted dotted dashed; }
+				// .no-warning { border-style: dotted dashed dashed dotted; }
+				// .no-warning { border-style: dotted dashed solid dotted; }
+				// .no-warning { border-style: dotted dashed dashed solid; }
+				// .no-warning { border-style: dotted dashed solid solid; }
+				// .no-warning { border-style: dotted dashed solid double; }
+				// .warning { border-style: dotted dotted dotted dotted; }
+				// .warning { border-style: dotted dashed dotted dashed; }
+				// .warning { border-style: dotted dashed dashed dashed; }
+				// .warning { border-style: dotted dashed solid dashed; }
+				if (res.get(1).equals(res.get(3))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             default:
                 // can't happen
