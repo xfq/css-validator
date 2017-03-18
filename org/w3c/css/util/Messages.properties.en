@@ -163,6 +163,7 @@ warning.pseudo-classes: Anchor pseudo-class %s have no effect on elements other 
 warning.noinside: %s can't be inside an inline element
 warning.withblock: Be careful. Pseudo-elements can only be attached to a block-level element
 warning.block-level: This property applies to block-level elements.
+warning.duplicate-selectors: There are duplicate selectors
 
 # used by org.w3c.css.parser.Frame
 warning.no-declaration: No declarations in the rule

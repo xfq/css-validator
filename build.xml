@@ -6,7 +6,7 @@
   <!-- User-overrideable properties                                      -->
   <!-- =================================================================== -->
 
-  <property name="servlet.lib" value="/usr/share/java/servlet-2.3.jar"/>
+  <property name="servlet.lib" value="/opt/tomcat/lib/servlet-api.jar"/>
 
   <!-- =================================================================== -->
   <!-- Project-wide properties                                           -->

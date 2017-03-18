@@ -12,6 +12,8 @@ import org.w3c.css.util.InvalidParamException;
 import org.w3c.css.util.Messages;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * SelectorsList<br />
@@ -55,6 +57,7 @@ public class SelectorsList {
 
     // the list of selectors
     private ArrayList<Selector> selectors;
+    private Set<Selector> uniqueSelectors;
 
     private ApplContext ac;
 
@@ -67,6 +70,7 @@ public class SelectorsList {
      */
     public SelectorsList() {
         selectors = new ArrayList<Selector>();
+        uniqueSelectors = new HashSet<Selector>();
     }
 
     /**
@@ -132,6 +136,10 @@ public class SelectorsList {
             }
         }
         selectors.add(selector);
+        uniqueSelectors.add(selector);
+        if (selectors.size() != uniqueSelectors.size()) {
+        	ac.getFrame().addWarning("duplicate-selectors", 2);
+        }
         stringrep = null;
     }
 
