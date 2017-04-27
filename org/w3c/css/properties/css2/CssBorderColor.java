@@ -112,17 +112,38 @@ public class CssBorderColor extends org.w3c.css.properties.css.CssBorderColor {
             case 2:
                 top.value = bottom.value = res.get(0);
                 right.value = left.value = res.get(1);
+                if (res.get(0).equals(res.get(1))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             case 3:
                 top.value = res.get(0);
                 right.value = left.value = res.get(1);
                 bottom.value = res.get(2);
+                if (res.get(0).equals(res.get(2))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             case 4:
                 top.value = res.get(0);
                 right.value = res.get(1);
                 bottom.value = res.get(2);
                 left.value = res.get(3);
+                
+                // .no-warning { border-color: red red green green; }
+				// .no-warning { border-color: red red red green; }
+				// .no-warning { border-color: red green green red; }
+				// .no-warning { border-color: red green blue red; }
+				// .no-warning { border-color: red green green blue; }
+				// .no-warning { border-color: red green blue blue; }
+				// .no-warning { border-color: red green blue black; }
+				// .warning { border-color: red red red red; }
+				// .warning { border-color: red green red green; }
+				// .warning { border-color: red green green green; }
+				// .warning { border-color: red green blue green; }
+				if (res.get(1).equals(res.get(3))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             default:
                 // can't happen

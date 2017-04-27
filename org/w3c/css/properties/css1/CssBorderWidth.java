@@ -135,17 +135,38 @@ public class CssBorderWidth extends org.w3c.css.properties.css.CssBorderWidth {
             case 2:
                 top.value = bottom.value = res.get(0);
                 right.value = left.value = res.get(1);
+                if (res.get(0).equals(res.get(1))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             case 3:
                 top.value = res.get(0);
                 right.value = left.value = res.get(1);
                 bottom.value = res.get(2);
+                if (res.get(0).equals(res.get(2))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             case 4:
                 top.value = res.get(0);
                 right.value = res.get(1);
                 bottom.value = res.get(2);
                 left.value = res.get(3);
+                
+                // .no-warning { border-width: 1px 1px 2px 2px; }
+				// .no-warning { border-width: 1px 1px 1px 2px; }
+				// .no-warning { border-width: 1px 2px 2px 1px; }
+				// .no-warning { border-width: 1px 2px 3px 1px; }
+				// .no-warning { border-width: 1px 2px 2px 3px; }
+				// .no-warning { border-width: 1px 2px 3px 3px; }
+				// .no-warning { border-width: 1px 2px 3px 4px; }
+				// .warning { border-width: 1px 1px 1px 1px; }
+				// .warning { border-width: 1px 2px 1px 2px; }
+				// .warning { border-width: 1px 2px 2px 2px; }
+				// .warning { border-width: 1px 2px 3px 2px; }
+				if (res.get(1).equals(res.get(3))) {
+					ac.getFrame().addWarning("shorthand-redundant", 2);
+				}
                 break;
             default:
                 // can't happen
